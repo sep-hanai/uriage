@@ -1,7 +1,8 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -25,12 +26,13 @@ public class UriageController {
 	 */
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String index(@PageableDefault(page = 0, size = 10) Pageable pageable,Model model) {
-		 Page<Uriage> uriagePage = uriageService.getList(pageable);
+//		 List<Uriage> uriagePage = uriageService.getList(pageable);
+		List<Uriage> uriagePage = uriageService.getList();
 //		 PageWrapper<Uriage> page = new PageWrapper<Uriage>(playerPage, "/index");
 //		 model.addAttribute("page", page);
 //		 model.addAttribute("jyusyolist", playerPage.getContent());
-//       model.addAttribute("inputForm", new UriageForm());
-
+//       model.addAttribute("uriageForm", new UriageForm());
+		 model.addAttribute("uriagePage",uriagePage);
        return "top";
    }
 }

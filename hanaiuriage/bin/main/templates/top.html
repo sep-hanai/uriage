@@ -22,18 +22,18 @@
 			<th style="width: 10%;">ステータス</th>
 			<th style="width: 10%;" colspan="2"></th>
 		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+		<tr th:each="uriage : ${uriagePage}" th:object="${uriage}">
+			<td th:text="${uriage.id}"></td>
+			<td th:text="${uriage.clientname}"></td>
+			<td th:text="${uriage.orderdate}"></td>
+			<td th:text="${uriage.snumber}"></td>
+			<td th:text="${uriage.subject}"></td>
+			<td th:text="${uriage.quantity}"></td>
+			<td th:text="${uriage.deadline + uriage.duedate}"></td>
+			<td th:text="${uriage.billingdate}"></td>
+			<td th:text="${uriage.estimate + uriage.decision}"></td>
+			<td th:text="${uriage.statusname}"></td>
+			<td th:text="${uriage.note}"></td>
 		</tr>
 	</table>
 </body>
