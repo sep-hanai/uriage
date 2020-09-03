@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.AddEntity;
 import com.example.demo.entity.Uriage;
+import com.example.demo.repository.AddRepository;
 import com.example.demo.repository.UriageRepository;
 
 /**
@@ -15,6 +17,7 @@ import com.example.demo.repository.UriageRepository;
 public class UriageService {
 	@Autowired
 	UriageRepository uriageRepository;
+	AddRepository addRepository;
 
 	/**
 	 * 全件検索
@@ -27,4 +30,7 @@ public class UriageService {
 //	    public List<Uriage> getList(Pageable pageable) {
 //	        return uriageRepository.findAllOrderById(pageable);
 //	    }
+	public List<AddEntity> getId() {
+		return addRepository.findAllOrderById();
+	}
 }

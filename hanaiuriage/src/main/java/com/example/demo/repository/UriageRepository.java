@@ -19,16 +19,12 @@ public interface UriageRepository extends JpaRepository<Uriage, Long>{
 	 * マスターテーブル=m
 	 * @return
 	 */
-	@Query(value = "SELECT uriage.id as id, uriagemasta.clientname as clientname, uriage.orderdate as orderdate, uriage.snumber as snumber, "
-			+ "uriage.subject as subject, uriage.quantity as quantity, uriage.deadline as deadline, "
-			+ "uriage.duedate as duedate, uriage.billingdate as billingdate, uriage.estimate as estimate, uriage.decision as decision,"
-			+ " uriagemasta.statusname as statusname, uriage.note as note, uriage.delete_flg as delete_flg "
-			+ "from uriage"
-			+ " join uriagemasta on uriagemasta.clientid = uriage.clientid "
-			+ "WHERE uriage.delete_flg=0 ORDER BY uriage.id", nativeQuery = true)
+	@Query(value = "SELECT u.id as id, m.clientname as clientname, u.orderdate as orderdate, u.snumber as snumber, "
+			+ "u.subject as subject, u.quantity as quantity, u.deadline as deadline, "
+			+ "u.duedate as duedate, u.billingdate as billingdate, u.estimate as estimate, u.decision as decision,"
+			+ " m.statusname as statusname, u.note as note, u.delete_flg as delete_flg "
+			+ "from uriage u"
+			+ " join uriagemasta m on m.clientid = u.clientid "
+			+ "WHERE u.delete_flg=0 AND u.clientid=m.clientid AND u.statusid=m.statusid ORDER BY u.id", nativeQuery = true)
 	List<Uriage> findAllOrderById();
-
-	//全件取得
-//	@Query("SELECT  FROM  WHERE uriage.delete_flg=0 ORDER BY uriage.id")
-//	Page<Uriage> findAllOrderById(Pageable pageable);
 }

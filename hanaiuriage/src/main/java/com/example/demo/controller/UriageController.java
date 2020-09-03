@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.demo.entity.AddEntity;
 import com.example.demo.entity.Uriage;
+import com.example.demo.form.UriageForm;
 import com.example.demo.service.UriageService;
 
 @Controller
@@ -35,4 +37,16 @@ public class UriageController {
 		 model.addAttribute("uriagePage",uriagePage);
        return "top";
    }
+
+	/**
+	 * 新規登録画面へ遷移
+	 * @return 登録画面表示
+	 */
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String add(Model model) {
+		List<AddEntity> adduriage = (List<AddEntity>) uriageService.getId();
+		model.addAttribute("adduriage", adduriage);
+		model.addAttribute("uriageForm", new UriageForm());
+		return "add";
+	}
 }

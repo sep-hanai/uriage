@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>案件登録</title>
+<link rel="stylesheet" type="text/css" th:href="@{/CSS/addedit.css}"></link>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<h1>製造部売上管理システム：案件登録</h1>
+	<form th:action="@{/addCheck}" th:object="${uriageForm}" method="post">
+<ul>
+<li style="list-style: none;"><label for="1">顧客＊：</label><select
+				name="client" id="1">
+				<option value="0">未設定</option>
+				<option th:each="addEntity : ${adduriage}" th:value="${addEntity.clientid}" th:text="${addEntity.clientid + addEntity.clientname}">
+				</option></select>
+</li>
+</ul>
+		<div class="btn2">
+			<input type="submit" value="確認" class="btn">
+			<input th:formaction="@{/back}" type="submit" value="戻る" class="btn">
+		</div>
+	</form>
+	<!-- delete_flgはaddcheckからhiddenで送る -->
+
+
+</body>
+</html>

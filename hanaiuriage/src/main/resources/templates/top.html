@@ -8,32 +8,79 @@
 </head>
 <body>
 	<h1>製造部売上管理システム：案件一覧</h1>
+	<!-- 新規登録 -->
+	<form th:action="@{/add}" method="POST">
+		<input class="add-input" type="submit" value="新規登録">
+	</form>
+
 	<table class="table">
 		<tr>
-			<th style="width: 5%;">No.</th>
+			<th style="width: 3%;">No.</th>
 			<th style="width: 12%;">顧客</th>
-			<th style="width: 8%;">受注日</th>
+			<th style="width: 10%;">受注日</th>
 			<th style="width: 5%;">S番号</th>
-			<th style="width: 17%;">件名</th>
-			<th style="width: 3%;">数量</th>
-			<th style="width: 10%;">納入指定日<br>/納入日</th>
+			<th style="width: 15%;">件名</th>
+			<th style="width: 7%;">数量</th>
+			<th style="width: 10%;">納入指定日<br>/納入日
+			</th>
 			<th style="width: 10%;">請求日</th>
-			<th style="width: 10%;">見積金額<br>/受注金額</th>
-			<th style="width: 10%;">ステータス</th>
+			<th style="width: 10%;">見積金額<br>/受注金額
+			</th>
+			<th style="width: 8%;">ステータス</th>
 			<th style="width: 10%;" colspan="2"></th>
 		</tr>
 		<tr th:each="uriage : ${uriagePage}" th:object="${uriage}">
 			<td th:text="${uriage.id}"></td>
+			<!-- 顧客名 -->
 			<td th:text="${uriage.clientname}"></td>
-			<td th:text="${uriage.orderdate}"></td>
-			<td th:text="${uriage.snumber}"></td>
-			<td th:text="${uriage.subject}"></td>
-			<td th:text="${uriage.quantity}"></td>
-			<td th:text="${uriage.deadline + uriage.duedate}"></td>
-			<td th:text="${uriage.billingdate}"></td>
-			<td th:text="${uriage.estimate + uriage.decision}"></td>
+			<!-- 受注日 -->
+			<td>[[${uriage.orderdate != null && uriage.orderdate != ''}?
+				${#strings.substring(uriage.orderdate,0,4)} + '/' +
+				${#strings.substring(uriage.orderdate,4,6)} + '/' +
+				${#strings.substring(uriage.orderdate,6,8)} : '-']]</td>
+			<!-- S番号 -->
+			<td th:text="${uriage.snumber != null && uriage.snumber != ''}? 'S-' + ${uriage.snumber} : '-'"></td>
+			<!-- 件名 -->
+			<td style="word-break: break-all;">[[${uriage.subject}]]</td>
+			<!-- 数量 -->
+			<td th:text="${uriage.quantity != null && uriage.quantity != ''}? ${uriage.quantity} + '式' : '-'"></td>
+			<!-- 納入指定日/納入日 -->
+			<td>[[${uriage.deadline != null && uriage.deadline != ''}?
+				${#strings.substring(uriage.deadline,0,4)} + '/' +
+				${#strings.substring(uriage.deadline,4,6)} + '/' +
+				${#strings.substring(uriage.deadline,6,8)} : '-']] <br>
+				[[${uriage.duedate != null && uriage.duedate != ''}?
+				${#strings.substring(uriage.duedate,0,4)} + '/' +
+				${#strings.substring(uriage.duedate,4,6)} + '/' +
+				${#strings.substring(uriage.duedate,6,8)} : '-']]
+			</td>
+			<!-- 請求日 -->
+			<td>[[${uriage.billingdate != null && uriage.billingdate != ''}?
+				${#strings.substring(uriage.billingdate,0,4)} + '/' +
+				${#strings.substring(uriage.billingdate,4,6)} + '/' +
+				${#strings.substring(uriage.billingdate,6,8)} :
+				'-']]</td>
+			<!-- 見積金額/受注金額 -->
+			<td>[[${uriage.estimate != null && uriage.estimate != ''}? '&yen' + ${#numbers.formatInteger(uriage.estimate, 3, 'COMMA')} : '-']]
+			<br>[[${uriage.decision != null && uriage.decision != ''}? '&yen' + ${#numbers.formatInteger(uriage.decision, 3, 'COMMA')} : '-']]
+			</td>
+			<!-- ステータス名 -->
 			<td th:text="${uriage.statusname}"></td>
-			<td th:text="${uriage.note}"></td>
+
+			<!-- nameでボタンの区別 -->
+			<!-- idのみ送信 -->
+			<td><form th:action="@{/edit}" method="post"
+					style="height: 100%">
+					<input type="submit" class="btn-outline" name="edit" value="編集"
+						style="width: 100%; outline: 0; border: 0px;"> <input
+						type="hidden" name="id" th:value="${uriage.id}">
+				</form></td>
+			<td><form th:action="@{/delete}" method="post">
+					<input type="submit" class="btn-outline" name="delete" value="削除"
+						style="width: 100%; outline: 0; border: 0px;"> <input
+						type="hidden" name="id" th:value="${uriage.id}">
+				</form></td>
+		</tr>
 		</tr>
 	</table>
 </body>
