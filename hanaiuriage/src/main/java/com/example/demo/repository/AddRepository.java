@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.AddEntity;
 @Repository
-public interface AddRepository extends JpaRepository <AddEntity, String>{
+public interface AddRepository extends JpaRepository <AddEntity, Long>{
 	@Query(value = "SELECT * FROM uriagemasta ORDER BY clientid ASC", nativeQuery = true)
 	List<AddEntity> findAllOrderById();
 }

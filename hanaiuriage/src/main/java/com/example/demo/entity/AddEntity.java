@@ -3,6 +3,9 @@ package com.example.demo.entity;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import lombok.Data;
 
@@ -12,6 +15,13 @@ import lombok.Data;
 @Data
 @Entity
 public class AddEntity implements Serializable {
+	/**
+	 * マスタID
+	 */
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long mastaid;
+
 	/**
 	 * 顧客ID
 	 */
@@ -31,4 +41,9 @@ public class AddEntity implements Serializable {
 	 * ステータス名
 	 */
 	private String statusname;
+
+	/**
+	 * 備考
+	 */
+	private String memo;
 }

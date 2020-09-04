@@ -17,6 +17,8 @@ import com.example.demo.repository.UriageRepository;
 public class UriageService {
 	@Autowired
 	UriageRepository uriageRepository;
+
+	@Autowired
 	AddRepository addRepository;
 
 	/**
