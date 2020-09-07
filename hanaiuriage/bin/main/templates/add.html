@@ -8,22 +8,40 @@
 </head>
 <body>
 	<h1>製造部売上管理システム：案件登録</h1>
-	<form th:action="@{/addCheck}" th:object="${uriageForm}" method="post">
-<ul>
-<li style="list-style: none;"><label for="1">顧客＊：</label><select
-				name="client" id="1">
-				<option value="0">未設定</option>
-				<option th:each="addEntity : ${adduriage}" th:value="${addEntity.clientid}" th:text="${addEntity.clientid + addEntity.clientname}">
-				</option></select>
-</li>
-</ul>
+	<form th:action="@{/addCheck}" th:object="${uriage}" method="post">
+		<table class="aaddtable">
+			<tr>
+				<th align="right">顧客＊：</th>
+				<td><select name="client" id="1">
+						<option value="">---</option>
+						<option th:each="client : ${addClient}"
+							th:value="${client.clientid}" th:text="${client.clientname}">
+						</option>
+				</select></td>
+			</tr>
+			<tr><th align="right">受注日：</th><td><input type="text" th:field="${uriage.orderdate}"></td></tr>
+			<tr><th align="right">S番号：</th><td>S-<input type="text" th:field="${uriage.snumber}"></td></tr>
+            <tr><th align="right">件名＊：</th><td><input type="text" th:field="${uriage.subject}"></td></tr>
+            <tr><th align="right">数量：</th><td><input type="text" th:field="${uriage.quantity}"></td></tr>
+            <tr><th align="right">納入指定日：</th><td><input type="text" th:field="${uriage.deadline}"></td></tr>
+            <tr><th align="right">納入日：</th><td><input type="text" th:field="${uriage.duedate}"></td></tr>
+            <tr><th align="right">請求日：</th><td><input type="text" th:field="${uriage.billingdate}"></td></tr>
+            <tr><th align="right">見積金額：</th><td><input type="text" th:field="${uriage.estimate}"></td></tr>
+            <tr><th align="right">受注金額：</th><td><input type="text" th:field="${uriage.decision}"></td></tr>
+            <tr><th align="right">ステータス：</th>
+            <td><select name="client" id="1">
+						<option value="">---</option>
+						<option th:each="status : ${addStatus}"
+							th:value="${status.statusid}" th:text="${status.statusname}">
+						</option>
+				</select></td></tr>
+            <tr><th align="right">備考：</th><td><input type="text" th:field="${uriage.note}"></td></tr>
+		</table>
+		<!-- delete_flgはaddCheckからhiddenで送る -->
 		<div class="btn2">
-			<input type="submit" value="確認" class="btn">
-			<input th:formaction="@{/back}" type="submit" value="戻る" class="btn">
+			<input type="submit" value="確認" class="btn"> <input
+				th:formaction="@{/back}" type="submit" value="戻る" class="btn">
 		</div>
 	</form>
-	<!-- delete_flgはaddcheckからhiddenで送る -->
-
-
 </body>
 </html>

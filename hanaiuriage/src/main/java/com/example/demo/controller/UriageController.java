@@ -10,9 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.example.demo.entity.AddEntity;
+import com.example.demo.entity.Client;
+import com.example.demo.entity.Status;
 import com.example.demo.entity.Uriage;
-import com.example.demo.form.UriageForm;
 import com.example.demo.service.UriageService;
 
 @Controller
@@ -44,9 +44,14 @@ public class UriageController {
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(Model model) {
-		List<AddEntity> adduriage = (List<AddEntity>) uriageService.getId();
-		model.addAttribute("adduriage", adduriage);
-		model.addAttribute("uriageForm", new UriageForm());
+		//顧客ID、Name取得
+		List<Client> addClient = uriageService.getClient();
+		model.addAttribute("addClient", addClient);
+		//ステータスID、Name取得
+		List<Status> addStatus = uriageService.getStatus();
+		model.addAttribute("addStatus", addStatus);
+
+		model.addAttribute("uriage", new Uriage());
 		return "add";
 	}
 }
