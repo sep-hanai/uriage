@@ -5,17 +5,19 @@
 <title>案件登録</title>
 <link rel="stylesheet" type="text/css" th:href="@{/CSS/addedit.css}"></link>
 <meta charset="UTF-8" />
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 </head>
 <body>
 	<h1>製造部売上管理システム：案件登録</h1>
 	<form th:action="@{/addCheck}" th:object="${uriage}" method="post">
 		<table class="aaddtable">
+			<!-- 顧客プルダウン -->
 			<tr>
 				<th align="right">顧客＊：</th>
 				<td><select name="client" id="1">
-						<option value="">---</option>
+						<option class="msg" value="" selected="selected">---</option>
 						<option th:each="client : ${addClient}"
-							th:value="${client.clientid}" th:text="${client.clientname}">
+							th:value="${client.clientid}" th:attr="class=${client.clientid}" th:text="${client.clientname}">
 						</option>
 				</select></td>
 			</tr>
@@ -29,11 +31,13 @@
             <tr><th align="right">見積金額：</th><td><input type="text" th:field="${uriage.estimate}"></td></tr>
             <tr><th align="right">受注金額：</th><td><input type="text" th:field="${uriage.decision}"></td></tr>
             <tr><th align="right">ステータス：</th>
-            <td><select name="client" id="1">
-						<option value="">---</option>
-						<option th:each="status : ${addStatus}"
-							th:value="${status.statusid}" th:text="${status.statusname}">
+            <!-- ステータスプルダウン -->
+            <td><select name="status" id="2">
+						<option class="msg" value="" selected="selected">---</option>
+						<option th:each="statusA : ${addStatusA}"
+							th:value="${statusA.statusid}" th:attr="class=${statusA.clientid}" th:text="${statusA.statusname}">
 						</option>
+
 				</select></td></tr>
             <tr><th align="right">備考：</th><td><input type="text" th:field="${uriage.note}"></td></tr>
 		</table>
@@ -43,5 +47,45 @@
 				th:formaction="@{/back}" type="submit" value="戻る" class="btn">
 		</div>
 	</form>
+	<script>
+	$(function() {
+
+		// clientが変更されたら発動
+		$('select[name="client"]').change(function() {
+
+			// 選択されているclientのクラス名を取得
+			var countyName = $('select[name="client"] option:selected').attr("class");
+			console.log(countyName);
+
+			// ステータスの要素数を取得
+			var count = $('select[name="status"]').children().length;
+
+			// ステータスの要素数分、for文で回す
+			for (var i=0; i<count; i++) {
+
+				var city = $('select[name="status"] option:eq(' + i + ')');
+
+				if(city.attr("class") === countyName) {
+					// 選択したclientと同じクラス名だった場合
+
+					city.show();
+				}else {
+					// 選択したclientとクラス名が違った場合
+
+					if(city.attr("class") === "msg") {
+					// 「---」という要素だった場合
+
+							city.show();  //「---」を表示させる
+							city.prop('selected',true);  //「---」を強制的に選択されている状態にする
+					} else {
+						// 「---」という要素でなかった場合
+
+						city.hide();
+					}
+				}
+			}
+		})
+	})
+	</script>
 </body>
 </html>

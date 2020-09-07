@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.entity.Client;
-import com.example.demo.entity.Status;
+import com.example.demo.entity.StatusA;
+import com.example.demo.entity.StatusB;
+import com.example.demo.entity.StatusC;
 import com.example.demo.entity.Uriage;
 import com.example.demo.service.UriageService;
 
@@ -47,9 +49,18 @@ public class UriageController {
 		//顧客ID、Name取得
 		List<Client> addClient = uriageService.getClient();
 		model.addAttribute("addClient", addClient);
-		//ステータスID、Name取得
-		List<Status> addStatus = uriageService.getStatus();
-		model.addAttribute("addStatus", addStatus);
+
+		//ステータスA取得
+		List<StatusA> addStatusA = uriageService.getStatusA();
+		model.addAttribute("addStatusA", addStatusA);
+
+		//ステータスB取得
+		List<StatusB> addStatusB = uriageService.getStatusB();
+		model.addAttribute("addStatusB", addStatusB);
+
+		//ステータスC取得
+		List<StatusC> addStatusC = uriageService.getStatusC();
+		model.addAttribute("addStatusC", addStatusC);
 
 		model.addAttribute("uriage", new Uriage());
 		return "add";

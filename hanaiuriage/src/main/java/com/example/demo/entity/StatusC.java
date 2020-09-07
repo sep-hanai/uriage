@@ -9,10 +9,16 @@ import lombok.Data;
 
 /**
  * 売上管理 Clientマスタ引用Entity
+ * ステータスC
  */
 @Data
 @Entity
-public class Status implements Serializable {
+public class StatusC implements Serializable {
+	/**
+	 *
+	 */
+	private String clientid;
+
 	/**
 	 * ステータスID
 	 */

@@ -6,10 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Client;
-import com.example.demo.entity.Status;
+import com.example.demo.entity.StatusA;
+import com.example.demo.entity.StatusB;
+import com.example.demo.entity.StatusC;
 import com.example.demo.entity.Uriage;
 import com.example.demo.repository.AddRepository;
-import com.example.demo.repository.StatusRepository;
+import com.example.demo.repository.StatusARepository;
+import com.example.demo.repository.StatusBRepository;
+import com.example.demo.repository.StatusCRepository;
 import com.example.demo.repository.UriageRepository;
 
 /**
@@ -24,7 +28,13 @@ public class UriageService {
 	AddRepository addRepository;
 
 	@Autowired
-	StatusRepository statusRepository;
+	StatusARepository statusARepository;
+
+	@Autowired
+	StatusBRepository statusBRepository;
+
+	@Autowired
+	StatusCRepository statusCRepository;
 
 	/**
 	 * 全件検索
@@ -42,8 +52,18 @@ public class UriageService {
 	public List<Client> getClient() {
 		return addRepository.findAllOrderById();
 	}
-	//ステータスID,Name取得
-	public List<Status> getStatus() {
-		return statusRepository.findAllOrderById();
+	//ステータスA取得
+	public List<StatusA> getStatusA(){
+		return statusARepository.findAllOrderById();
+	}
+
+	//ステータスB取得
+	public List<StatusB> getStatusB() {
+		return statusBRepository.findAllOrderById();
+	}
+
+	//ステータスC取得
+	public List<StatusC> getStatusC() {
+		return statusCRepository.findAllOrderById();
 	}
 }
