@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Client;
 import com.example.demo.entity.StatusA;
-import com.example.demo.entity.StatusB;
-import com.example.demo.entity.StatusC;
 import com.example.demo.entity.Uriage;
 import com.example.demo.repository.AddRepository;
 import com.example.demo.repository.StatusARepository;
@@ -57,13 +55,10 @@ public class UriageService {
 		return statusARepository.findAllOrderById();
 	}
 
-	//ステータスB取得
-	public List<StatusB> getStatusB() {
-		return statusBRepository.findAllOrderById();
-	}
-
-	//ステータスC取得
-	public List<StatusC> getStatusC() {
-		return statusCRepository.findAllOrderById();
+	/**
+	 * 顧客・ステータスIDからName取得
+	 */
+	public List<StatusA> getSelectName(String clientid, String statusid) {
+		return statusARepository.findByName(clientid, statusid);
 	}
 }

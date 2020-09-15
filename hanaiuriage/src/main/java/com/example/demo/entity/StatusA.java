@@ -15,14 +15,24 @@ import lombok.Data;
 @Entity
 public class StatusA implements Serializable {
 	/**
-	 *
+	 * マスタID
+	 */
+	@Id
+	private Long mastaid;
+
+	/**
+	 *顧客ID
 	 */
 	private String clientid;
 
 	/**
+	 * 顧客名
+	 */
+	private String clientname;
+
+	/**
 	 * ステータスID
 	 */
-	@Id
 	private String statusid;
 
 	/**

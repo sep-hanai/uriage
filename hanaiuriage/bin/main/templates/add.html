@@ -9,37 +9,36 @@
 </head>
 <body>
 	<h1>製造部売上管理システム：案件登録</h1>
-	<form th:action="@{/addCheck}" th:object="${uriage}" method="post">
+	<form th:action="@{/addCheck}" th:object="${insert}" method="post">
 		<table class="aaddtable">
 			<!-- 顧客プルダウン -->
 			<tr>
 				<th align="right">顧客＊：</th>
-				<td><select name="client" id="1">
+				<td><select class="client" name="client" id="1" th:field="*{clientid}">
 						<option class="msg" value="" selected="selected">---</option>
 						<option th:each="client : ${addClient}"
 							th:value="${client.clientid}" th:attr="class=${client.clientid}" th:text="${client.clientname}">
 						</option>
 				</select></td>
 			</tr>
-			<tr><th align="right">受注日：</th><td><input type="text" th:field="${uriage.orderdate}"></td></tr>
-			<tr><th align="right">S番号：</th><td>S-<input type="text" th:field="${uriage.snumber}"></td></tr>
-            <tr><th align="right">件名＊：</th><td><input type="text" th:field="${uriage.subject}"></td></tr>
-            <tr><th align="right">数量：</th><td><input type="text" th:field="${uriage.quantity}"></td></tr>
-            <tr><th align="right">納入指定日：</th><td><input type="text" th:field="${uriage.deadline}"></td></tr>
-            <tr><th align="right">納入日：</th><td><input type="text" th:field="${uriage.duedate}"></td></tr>
-            <tr><th align="right">請求日：</th><td><input type="text" th:field="${uriage.billingdate}"></td></tr>
-            <tr><th align="right">見積金額：</th><td><input type="text" th:field="${uriage.estimate}"></td></tr>
-            <tr><th align="right">受注金額：</th><td><input type="text" th:field="${uriage.decision}"></td></tr>
+			<tr><th align="right">受注日：</th><td><input type="text" th:field="${insert.orderdate}"></td></tr>
+			<tr><th align="right">S番号：</th><td>S-<input type="text" th:field="${insert.snumber}"></td></tr>
+            <tr><th align="right">件名＊：</th><td><input type="text" th:field="${insert.subject}"></td></tr>
+            <tr><th align="right">数量：</th><td><input type="text" th:field="${insert.quantity}"></td></tr>
+            <tr><th align="right">納入指定日：</th><td><input type="text" th:field="${insert.deadline}"></td></tr>
+            <tr><th align="right">納入日：</th><td><input type="text" th:field="${insert.duedate}"></td></tr>
+            <tr><th align="right">請求日：</th><td><input type="text" th:field="${insert.billingdate}"></td></tr>
+            <tr><th align="right">見積金額：</th><td><input type="text" th:field="${insert.estimate}"></td></tr>
+            <tr><th align="right">受注金額：</th><td><input type="text" th:field="${insert.decision}"></td></tr>
             <tr><th align="right">ステータス：</th>
             <!-- ステータスプルダウン -->
-            <td><select name="status" id="2">
-						<option class="msg" value="" selected="selected">---</option>
+            <td><select class="status" name="status" id="2" th:field="*{statusid}">
+						<option class="msg" value="">---</option>
 						<option th:each="statusA : ${addStatusA}"
 							th:value="${statusA.statusid}" th:attr="class=${statusA.clientid}" th:text="${statusA.statusname}">
 						</option>
-
 				</select></td></tr>
-            <tr><th align="right">備考：</th><td><input type="text" th:field="${uriage.note}"></td></tr>
+            <tr><th align="right">備考：</th><td><input type="text" th:field="${insert.note}"></td></tr>
 		</table>
 		<!-- delete_flgはaddCheckからhiddenで送る -->
 		<div class="btn2">
@@ -51,19 +50,19 @@
 	$(function() {
 
 		// clientが変更されたら発動
-		$('select[name="client"]').change(function() {
+		$('select[class="client"]').change(function() {
 
 			// 選択されているclientのクラス名を取得
-			var countyName = $('select[name="client"] option:selected').attr("class");
+			var countyName = $('select[class="client"] option:selected').attr("class");
 			console.log(countyName);
 
 			// ステータスの要素数を取得
-			var count = $('select[name="status"]').children().length;
+			var count = $('select[class="status"]').children().length;
 
 			// ステータスの要素数分、for文で回す
 			for (var i=0; i<count; i++) {
 
-				var city = $('select[name="status"] option:eq(' + i + ')');
+				var city = $('select[class="status"] option:eq(' + i + ')');
 
 				if(city.attr("class") === countyName) {
 					// 選択したclientと同じクラス名だった場合

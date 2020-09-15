@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,6 +15,10 @@ import com.example.demo.entity.StatusA;
  */
 @Repository
 public interface StatusARepository extends JpaRepository <StatusA, Long>{
-	@Query(value = "SELECT clientid, statusid, statusname FROM uriagemasta WHERE clientid=1 ORDER BY mastaid ASC", nativeQuery = true)
+	@Query(value = "SELECT mastaid, clientid, clientname, statusid, statusname FROM uriagemasta ORDER BY mastaid ASC", nativeQuery = true)
 	List<StatusA> findAllOrderById();
+
+	@Query(value = "SELECT mastaid, clientid, clientname, statusid, statusname FROM uriagemasta WHERE clientid LIKE 'clientid' AND statusid LIKE 'statusid'", nativeQuery  = true)
+	List<StatusA> findByName(@Param("clientid") String clientid, @Param("statusid") String statusid);
 }
+

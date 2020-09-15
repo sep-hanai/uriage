@@ -2,18 +2,21 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Client;
+import com.example.demo.entity.Insert;
 import com.example.demo.entity.StatusA;
-import com.example.demo.entity.StatusB;
-import com.example.demo.entity.StatusC;
 import com.example.demo.entity.Uriage;
 import com.example.demo.service.UriageService;
 
@@ -54,15 +57,34 @@ public class UriageController {
 		List<StatusA> addStatusA = uriageService.getStatusA();
 		model.addAttribute("addStatusA", addStatusA);
 
-		//ステータスB取得
-		List<StatusB> addStatusB = uriageService.getStatusB();
-		model.addAttribute("addStatusB", addStatusB);
-
-		//ステータスC取得
-		List<StatusC> addStatusC = uriageService.getStatusC();
-		model.addAttribute("addStatusC", addStatusC);
-
-		model.addAttribute("uriage", new Uriage());
+		model.addAttribute("insert", new Insert());
 		return "add";
 	}
-}
+
+	/**
+	* 確認画面へ遷移
+	* @return 確認画面表示
+	*/
+	@RequestMapping(value = "/addCheck", method = RequestMethod.POST)
+	public String addcheck(@ModelAttribute Insert insert, HttpServletRequest request, Model model, @RequestParam String clientid, String statusid) {
+//顧客・ステータスのIDをパラメータにNameを呼び出す
+		//ステータス有り
+
+		List<StatusA> nameAll = uriageService.getSelectName(clientid, statusid);
+		model.addAttribute("nameAll", nameAll);
+
+			//serviceからメソッド呼び出し
+//				JyusyorokuService svc = new JyusyorokuService();
+//				String errAll[];
+//				errAll = svc.err(name, address, tel);
+//			//エラー判定
+//			//エラー有り
+//				if (errAll [0] != null || errAll [1] != null || errAll [2] != null) {
+//				model.addAttribute("errAll", errAll);
+//				return "add";
+//				}else {
+//			//エラー無し
+//				model.addAttribute("clientid", clientid);
+//				model.addAttribute("statusid", statusid);
+		return "addCheck";
+}}

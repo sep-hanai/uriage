@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>案件登録確認</title>
+<link rel="stylesheet" type="text/css" th:href="@{/CSS/check.css}"></link>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<h1>製造部売上管理システム：案件登録</h1>
+	<form th:action="@{/create}" th:object="${insert}" method="post">
+     <table class="aaddtable">
+			<!-- 顧客プルダウン -->
+			<tr th:each="statusA : ${nameAll}" th:field="${statusA.clientid}">
+				<th align="right">顧客＊：</th>
+				<td th:text="${statusA.clientname}"></td>
+			</tr>
+			<tr><th align="right">受注日：</th><td th:text="${insert.orderdate}"></td></tr>
+			<tr><th align="right">S番号：</th><td th:text="${insert.snumber}"></td></tr>
+            <tr><th align="right">件名＊：</th><td th:text="${insert.subject}"></td></tr>
+            <tr><th align="right">数量：</th><td th:text="${insert.quantity}"></td></tr>
+            <tr><th align="right">納入指定日：</th><td th:text="${insert.deadline}"></td></tr>
+            <tr><th align="right">納入日：</th><td th:text="${insert.duedate}"></td></tr>
+            <tr><th align="right">請求日：</th><td th:text="${insert.billingdate}"></td></tr>
+            <tr><th align="right">見積金額：</th><td th:text="${insert.estimate}"></td></tr>
+            <tr><th align="right">受注金額：</th><td th:text="${insert.decision}"></td></tr>
+            <tr th:each="statusA : ${nameAll}" th:field="${statusA.statusname}"><th align="right">ステータス：</th>
+            <td th:text="${statusA.statusname}"></td></tr>
+            <tr><th align="right">備考：</th><td th:text="${insert.note}"></td></tr>
+            <tr><th align="right">顧客：</th><td th:text="${insert.clientid}"></td></tr>
+		</table>
+		</form>
+</body>
+</html>
