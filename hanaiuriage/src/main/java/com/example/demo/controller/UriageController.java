@@ -68,11 +68,16 @@ public class UriageController {
 	@RequestMapping(value = "/addCheck", method = RequestMethod.POST)
 	public String addcheck(@ModelAttribute Insert insert, HttpServletRequest request, Model model, @RequestParam String clientid, String statusid) {
 //顧客・ステータスのIDをパラメータにNameを呼び出す
-		//ステータス有り
-
+		//ステータス有り、顧客・ステータスName取得
+		String statusid1 = request.getParameter("statusid");
+		if(statusid1 != "") {
 		List<StatusA> nameAll = uriageService.getSelectName(clientid, statusid);
 		model.addAttribute("nameAll", nameAll);
-
+		}else{
+			//ステータス無し、顧客Nameのみ取得
+			List<Client> clientAll = uriageService.getSelectClient(clientid);
+			model.addAttribute("clientAll", clientAll);
+		}
 			//serviceからメソッド呼び出し
 //				JyusyorokuService svc = new JyusyorokuService();
 //				String errAll[];

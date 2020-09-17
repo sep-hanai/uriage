@@ -21,13 +21,13 @@
 						</option>
 				</select></td>
 			</tr>
-			<tr><th align="right">受注日：</th><td><input type="text" th:field="${insert.orderdate}"></td></tr>
+			<tr><th align="right">受注日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.orderdate}"></td></tr>
 			<tr><th align="right">S番号：</th><td>S-<input type="text" th:field="${insert.snumber}"></td></tr>
             <tr><th align="right">件名＊：</th><td><input type="text" th:field="${insert.subject}"></td></tr>
             <tr><th align="right">数量：</th><td><input type="text" th:field="${insert.quantity}"></td></tr>
-            <tr><th align="right">納入指定日：</th><td><input type="text" th:field="${insert.deadline}"></td></tr>
-            <tr><th align="right">納入日：</th><td><input type="text" th:field="${insert.duedate}"></td></tr>
-            <tr><th align="right">請求日：</th><td><input type="text" th:field="${insert.billingdate}"></td></tr>
+            <tr><th align="right">納入指定日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.deadline}"></td></tr>
+            <tr><th align="right">納入日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.duedate}"></td></tr>
+            <tr><th align="right">請求日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.billingdate}"></td></tr>
             <tr><th align="right">見積金額：</th><td><input type="text" th:field="${insert.estimate}"></td></tr>
             <tr><th align="right">受注金額：</th><td><input type="text" th:field="${insert.decision}"></td></tr>
             <tr><th align="right">ステータス：</th>
@@ -38,7 +38,7 @@
 							th:value="${statusA.statusid}" th:attr="class=${statusA.clientid}" th:text="${statusA.statusname}">
 						</option>
 				</select></td></tr>
-            <tr><th align="right">備考：</th><td><input type="text" th:field="${insert.note}"></td></tr>
+            <tr><th align="right" valign="top">備考：</th><td><textarea rows="5" cols="50" wrap="hard" th:field="${insert.note}"></textarea></td></tr>
 		</table>
 		<!-- delete_flgはaddCheckからhiddenで送る -->
 		<div class="btn2">

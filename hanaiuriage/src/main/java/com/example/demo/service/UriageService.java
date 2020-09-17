@@ -61,4 +61,11 @@ public class UriageService {
 	public List<StatusA> getSelectName(String clientid, String statusid) {
 		return statusARepository.findByName(clientid, statusid);
 	}
+
+	/**
+	 * 顧客・ステータスIDからName取得
+	 */
+	public List<Client> getSelectClient(String clientid) {
+		return addRepository.findByClient(clientid);
+	}
 }

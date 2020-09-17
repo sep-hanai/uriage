@@ -18,7 +18,7 @@ public interface StatusARepository extends JpaRepository <StatusA, Long>{
 	@Query(value = "SELECT mastaid, clientid, clientname, statusid, statusname FROM uriagemasta ORDER BY mastaid ASC", nativeQuery = true)
 	List<StatusA> findAllOrderById();
 
-	@Query(value = "SELECT mastaid, clientid, clientname, statusid, statusname FROM uriagemasta WHERE clientid LIKE 'clientid' AND statusid LIKE 'statusid'", nativeQuery  = true)
+	@Query(value = "SELECT mastaid, clientid, clientname, statusid, statusname FROM uriagemasta WHERE clientid LIKE :clientid AND statusid LIKE :statusid", nativeQuery  = true)
 	List<StatusA> findByName(@Param("clientid") String clientid, @Param("statusid") String statusid);
-}
 
+}

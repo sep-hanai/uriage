@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+body{
+	width: 90%;
+	margin: 0 auto;
+}
+
+.aaddtable td {
+	white-space: pre-wrap;
+}
