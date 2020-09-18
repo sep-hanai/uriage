@@ -19,15 +19,25 @@
 						<option th:each="client : ${addClient}"
 							th:value="${client.clientid}" th:attr="class=${client.clientid}" th:text="${client.clientname}">
 						</option>
-				</select></td>
+				</select></td><td th:if="${errAll}"><div th:if="${errAll[0]}" th:text="${errAll[0]}"></div></td>
 			</tr>
-			<tr><th align="right">受注日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.orderdate}"></td></tr>
+			<tr><th align="right">受注日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.orderdate}"></td>
+			<td th:if="${errAll}"><div th:if="${errAll[2]}" th:text="${errAll[2]}"></div></td>
+			</tr>
 			<tr><th align="right">S番号：</th><td>S-<input type="text" th:field="${insert.snumber}"></td></tr>
-            <tr><th align="right">件名＊：</th><td><input type="text" th:field="${insert.subject}"></td></tr>
+            <tr><th align="right">件名＊：</th><td><input type="text" th:field="${insert.subject}"></td>
+            <td th:if="${errAll}"><div th:if="${errAll[4]}" th:text="${errAll[4]}"></div></td>
+            </tr>
             <tr><th align="right">数量：</th><td><input type="text" th:field="${insert.quantity}"></td></tr>
-            <tr><th align="right">納入指定日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.deadline}"></td></tr>
-            <tr><th align="right">納入日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.duedate}"></td></tr>
-            <tr><th align="right">請求日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.billingdate}"></td></tr>
+            <tr><th align="right">納入指定日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.deadline}"></td>
+            <td th:if="${errAll}"><div th:if="${errAll[6]}" th:text="${errAll[6]}"></div></td>
+            </tr>
+            <tr><th align="right">納入日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.duedate}"></td>
+            <td th:if="${errAll}"><div th:if="${errAll[7]}" th:text="${errAll[7]}"></div></td>
+            </tr>
+            <tr><th align="right">請求日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.billingdate}"></td>
+            <td th:if="${errAll}"><div th:if="${errAll[8]}" th:text="${errAll[8]}"></div></td>
+            </tr>
             <tr><th align="right">見積金額：</th><td><input type="text" th:field="${insert.estimate}"></td></tr>
             <tr><th align="right">受注金額：</th><td><input type="text" th:field="${insert.decision}"></td></tr>
             <tr><th align="right">ステータス：</th>

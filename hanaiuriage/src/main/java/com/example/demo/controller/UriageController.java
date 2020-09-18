@@ -67,7 +67,30 @@ public class UriageController {
 	*/
 	@RequestMapping(value = "/addCheck", method = RequestMethod.POST)
 	public String addcheck(@ModelAttribute Insert insert, HttpServletRequest request, Model model, @RequestParam String clientid, String statusid) {
-//顧客・ステータスのIDをパラメータにNameを呼び出す
+		String[] errAll = uriageService.getErr(insert);
+		//エラー判定、配列の要素にerrmsgがあるかチェック
+		boolean empty = true;
+		for (int i=0; i<errAll.length; i++) {
+		  if (errAll[i] != null) {
+		    empty = false;
+		    break;
+		  }
+		}
+		//エラー有り
+		if(empty == false){
+			model.addAttribute("errAll", errAll);
+			//顧客ID、Name取得
+			List<Client> addClient = uriageService.getClient();
+			model.addAttribute("addClient", addClient);
+
+			//ステータスA取得
+			List<StatusA> addStatusA = uriageService.getStatusA();
+			model.addAttribute("addStatusA", addStatusA);
+
+			return "add";
+			}else {
+		//エラー無し
+		//顧客・ステータスのIDをパラメータにNameを呼び出す
 		//ステータス有り、顧客・ステータスName取得
 		String statusid1 = request.getParameter("statusid");
 		if(statusid1 != "") {
@@ -78,18 +101,5 @@ public class UriageController {
 			List<Client> clientAll = uriageService.getSelectClient(clientid);
 			model.addAttribute("clientAll", clientAll);
 		}
-			//serviceからメソッド呼び出し
-//				JyusyorokuService svc = new JyusyorokuService();
-//				String errAll[];
-//				errAll = svc.err(name, address, tel);
-//			//エラー判定
-//			//エラー有り
-//				if (errAll [0] != null || errAll [1] != null || errAll [2] != null) {
-//				model.addAttribute("errAll", errAll);
-//				return "add";
-//				}else {
-//			//エラー無し
-//				model.addAttribute("clientid", clientid);
-//				model.addAttribute("statusid", statusid);
 		return "addCheck";
-}}
+}}}
