@@ -19,7 +19,7 @@
 						<option th:each="client : ${addClient}"
 							th:value="${client.clientid}" th:attr="class=${client.clientid}" th:text="${client.clientname}">
 						</option>
-				</select></td><td th:if="${errAll}"><div th:if="${errAll[0]}" th:text="${errAll[0]}"></div></td>
+				</select></td><td th:if="${errAll}"><div th:if="${errAll[1]}" th:text="${errAll[1]}"></div></td>
 			</tr>
 			<tr><th align="right">受注日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.orderdate}"></td>
 			<td th:if="${errAll}"><div th:if="${errAll[2]}" th:text="${errAll[2]}"></div></td>
