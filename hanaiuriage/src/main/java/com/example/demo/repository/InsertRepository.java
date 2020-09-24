@@ -1,14 +1,10 @@
 package com.example.demo.repository;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.entity.Client;
+import com.example.demo.entity.Insert;
 @Repository
-public interface InsertRepository extends JpaRepository <Client, Long>{
-	@Query(value = "SELECT DISTINCT clientid, clientname FROM uriagemasta ORDER BY mastaid ASC", nativeQuery = true)
-	List<Client> findAllOrderById();
+public interface InsertRepository extends JpaRepository <Insert, Long>{
+
 }

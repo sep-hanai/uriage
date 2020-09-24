@@ -22,14 +22,14 @@
 				</th:block>
 			</tr>
 			<tr><th align="right">受注日：</th><td th:text="${insert.orderdate}"></td></tr>
-			<tr><th align="right">S番号：</th><td th:text="${insert.snumber}"></td></tr>
+			<tr><th align="right">S番号：</th><td th:text="${insert.snumber != null && insert.snumber != ''}? 'S-' + ${insert.snumber} : ''"></td></tr>
             <tr><th align="right">件名＊：</th><td th:text="${insert.subject}"></td></tr>
             <tr><th align="right">数量：</th><td th:text="${insert.quantity}"></td></tr>
             <tr><th align="right">納入指定日：</th><td th:text="${insert.deadline}"></td></tr>
             <tr><th align="right">納入日：</th><td th:text="${insert.duedate}"></td></tr>
             <tr><th align="right">請求日：</th><td th:text="${insert.billingdate}"></td></tr>
-            <tr><th align="right">見積金額：</th><td th:text="${insert.estimate}"></td></tr>
-            <tr><th align="right">受注金額：</th><td th:text="${insert.decision}"></td></tr>
+            <tr><th align="right">見積金額：</th><td>[[${insert.estimate != null && insert.estimate != ''}? '&yen' + ${#numbers.formatInteger(insert.estimate, 3, 'COMMA')} : '']]</td></tr>
+            <tr><th align="right">受注金額：</th><td>[[${insert.decision != null && insert.decision != ''}? '&yen' + ${#numbers.formatInteger(insert.decision, 3, 'COMMA')} : '']]</td></tr>
             <tr>
             <!-- ステータスあり -->
             <th:block th:each="statusA : ${nameAll}" th:if="${statusA.statusname != ''}">
@@ -44,7 +44,23 @@
             </tr>
             <tr><th align="right" valign="top">備考：</th><td th:text="${insert.note}"></td></tr>
 		</table>
-		<form th:action="@{/create}" th:object="${insert}" method="post">
+	<form th:action="@{/create}" th:object="${insert}" method="post">
+		<input type="hidden" name="clientid" th:value="${insert.clientid}">
+		<input type="hidden" name="orderdate" th:value="${insert.orderdate}">
+		<input type="hidden" name="snumber" th:value="${insert.snumber}">
+		<input type="hidden" name="subject" th:value="${insert.subject}">
+		<input type="hidden" name="quantity" th:value="${insert.quantity}">
+		<input type="hidden" name="deadline" th:value="${insert.deadline}">
+		<input type="hidden" name="duedate" th:value="${insert.duedate}">
+		<input type="hidden" name="billingdate" th:value="${insert.billingdate}">
+		<input type="hidden" name="estimate" th:value="${insert.estimate}">
+		<input type="hidden" name="decision" th:value="${insert.decision}">
+		<input type="hidden" name="statusid" th:value="${insert.statusid}">
+		<input type="hidden" name="note" th:value="${insert.note}">
+		<div class="btn2">
+			<input type="submit" value="登録" class="btn"> <input
+				th:formaction="@{/back}" type="submit" value="戻る" class="btn">
+		</div>
 		</form>
 </body>
 </html>

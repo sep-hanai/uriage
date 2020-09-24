@@ -24,11 +24,15 @@
 			<tr><th align="right">受注日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.orderdate}"></td>
 			<td th:if="${errAll}"><div th:if="${errAll[2]}" th:text="${errAll[2]}"></div></td>
 			</tr>
-			<tr><th align="right">S番号：</th><td>S-<input type="text" th:field="${insert.snumber}"></td></tr>
+			<tr><th align="right">S番号：</th><td>S-<input type="text" th:field="${insert.snumber}"></td>
+			<td th:if="${errAll}"><div th:if="${errAll[3]}" th:text="${errAll[3]}"></div></td>
+			</tr>
             <tr><th align="right">件名＊：</th><td><input type="text" th:field="${insert.subject}"></td>
             <td th:if="${errAll}"><div th:if="${errAll[4]}" th:text="${errAll[4]}"></div></td>
             </tr>
-            <tr><th align="right">数量：</th><td><input type="text" th:field="${insert.quantity}"></td></tr>
+            <tr><th align="right">数量：</th><td><input type="text" th:field="${insert.quantity}"></td>
+            <td th:if="${errAll}"><div th:if="${errAll[5]}" th:text="${errAll[5]}"></div></td>
+            </tr>
             <tr><th align="right">納入指定日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.deadline}"></td>
             <td th:if="${errAll}"><div th:if="${errAll[6]}" th:text="${errAll[6]}"></div></td>
             </tr>
@@ -38,8 +42,12 @@
             <tr><th align="right">請求日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.billingdate}"></td>
             <td th:if="${errAll}"><div th:if="${errAll[8]}" th:text="${errAll[8]}"></div></td>
             </tr>
-            <tr><th align="right">見積金額：</th><td><input type="text" th:field="${insert.estimate}"></td></tr>
-            <tr><th align="right">受注金額：</th><td><input type="text" th:field="${insert.decision}"></td></tr>
+            <tr><th align="right">見積金額：</th><td>\<input type="text" th:field="${insert.estimate}"></td>
+            <td th:if="${errAll}"><div th:if="${errAll[9]}" th:text="${errAll[9]}"></div></td>
+            </tr>
+            <tr><th align="right">受注金額：</th><td>\<input type="text" th:field="${insert.decision}"></td>
+            <td th:if="${errAll}"><div th:if="${errAll[10]}" th:text="${errAll[10]}"></div></td>
+            </tr>
             <tr><th align="right">ステータス：</th>
             <!-- ステータスプルダウン -->
             <td><select class="status" name="status" id="2" th:field="*{statusid}">
