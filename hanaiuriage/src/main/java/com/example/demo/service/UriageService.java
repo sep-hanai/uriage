@@ -10,11 +10,10 @@ import com.example.demo.entity.Client;
 import com.example.demo.entity.Insert;
 import com.example.demo.entity.StatusA;
 import com.example.demo.entity.Uriage;
+import com.example.demo.form.UriageForm;
 import com.example.demo.repository.AddRepository;
 import com.example.demo.repository.InsertRepository;
 import com.example.demo.repository.StatusARepository;
-import com.example.demo.repository.StatusBRepository;
-import com.example.demo.repository.StatusCRepository;
 import com.example.demo.repository.UriageRepository;
 
 /**
@@ -32,10 +31,7 @@ public class UriageService {
 	StatusARepository statusARepository;
 
 	@Autowired
-	StatusBRepository statusBRepository;
-
-	@Autowired
-	StatusCRepository statusCRepository;
+	InsertRepository insertRepository;
 
 	/**
 	 * 全件検索
@@ -66,27 +62,27 @@ public class UriageService {
 	}
 
 	/**
-	 * 顧客・ステータスIDからName取得
+	 * 顧客IDからName取得
 	 */
 	public List<Client> getSelectClient(String clientid) {
 		return addRepository.findByClient(clientid);
 	}
 
-	public String[] getErr(Insert insert) throws UnsupportedEncodingException {
+	public String[] getErr(UriageForm uriageForm) throws UnsupportedEncodingException {
 		String errAll[] = new String[11];
 //顧客・件名
-		String clientid = insert.getClientid();
-		String subject = insert.getSubject();
+		String clientid = uriageForm.getClientid();
+		String subject = uriageForm.getSubject();
 		if(clientid=="" || subject=="") {
 			errAll[1]="必須項目です。";
 			errAll[4]="必須項目です。";
 		}
 //日付
 		String date[] = new String[4];
-		date[0] = insert.getOrderdate();
-		date[1] = insert.getDeadline();
-		date[2] = insert.getDuedate();
-		date[3] = insert.getBillingdate();
+		date[0] = uriageForm.getOrderdate();
+		date[1] = uriageForm.getDeadline();
+		date[2] = uriageForm.getDuedate();
+		date[3] = uriageForm.getBillingdate();
 		for (int i=0; i< 4; i++) {
 		  if(date[i]=="") {
 		  }else if (date[i].matches(".*^[0-9]{4}/[0-9]{2}/[0-9]{2}.*")!=true) {
@@ -98,7 +94,7 @@ public class UriageService {
 		}
 //S番号
 		try {
-		String snumber = insert.getSnumber();
+		String snumber = uriageForm.getSnumber();
 		int t = snumber.getBytes("Shift_JIS").length;
 		if(snumber == ""){}else if (t != 4 || snumber.matches("[0-9]{0,4}")!=true) {
 			errAll[3]="S番号は半角数字4桁で入力してください。";
@@ -109,7 +105,7 @@ public class UriageService {
 		}
 //数量
 		try {
-			String quantity = insert.getQuantity();
+			String quantity = uriageForm.getQuantity();
 			int t = quantity.getBytes("Shift_JIS").length;
 			if(quantity == "") {
 			}else if(5 < t || quantity.matches("[0-9]{0,5}")!=true) {
@@ -121,8 +117,8 @@ public class UriageService {
 		}
 //金額
 		String money[] = new String[2];
-		money[0] = insert.getEstimate();
-		money[1] = insert.getDecision();
+		money[0] = uriageForm.getEstimate();
+		money[1] = uriageForm.getDecision();
 		for (int i=0; i<2; i++) {
 		  if(money[i]=="") {
 		  }else if (money[i].matches("[0-9]{0,12}") != true  || 12 < money[i].getBytes("Shift_JIS").length) {
@@ -136,9 +132,9 @@ public class UriageService {
 
 	/**
 	 * 新規登録
-	 * @parem jyusyoroku 登録情報
+	 * @parem insert 登録情報
 	 */
 	public void create(Insert insert) {
-		InsertRepository.save(insert);
+		insertRepository.save(insert);
 	}
 }

@@ -15,7 +15,7 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name="urige")
+@Table(name="uriage")
 public class Insert implements Serializable{
 	/**
 	 * id

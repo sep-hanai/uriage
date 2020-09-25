@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -20,6 +21,7 @@ import com.example.demo.entity.Client;
 import com.example.demo.entity.Insert;
 import com.example.demo.entity.StatusA;
 import com.example.demo.entity.Uriage;
+import com.example.demo.form.UriageForm;
 import com.example.demo.service.UriageService;
 
 @Controller
@@ -69,7 +71,7 @@ public class UriageController {
 		List<StatusA> addStatusA = uriageService.getStatusA();
 		model.addAttribute("addStatusA", addStatusA);
 
-		model.addAttribute("insert", new Insert());
+		model.addAttribute("uriageForm", new UriageForm());
 		return "add";
 	}
 
@@ -79,9 +81,9 @@ public class UriageController {
 	 * @throws UnsupportedEncodingException
 	*/
 	@RequestMapping(value = "/addCheck", method = RequestMethod.POST)
-	public String addcheck(@ModelAttribute Insert insert, HttpServletRequest request, Model model,
+	public String addcheck(@ModelAttribute UriageForm uriageForm, HttpServletRequest request, Model model,
 			@RequestParam String clientid, String statusid) throws UnsupportedEncodingException {
-		String[] errAll = uriageService.getErr(insert);
+		String[] errAll = uriageService.getErr(uriageForm);
 		//エラー判定、配列の要素にerrmsgがあるかチェック
 		boolean empty = true;
 		for (int i = 0; i < errAll.length; i++) {
@@ -125,7 +127,9 @@ public class UriageController {
 	 * @return 一覧画面表示
 	 */
 	@PostMapping("/create")
-	String regist(@ModelAttribute Insert insert) {
+	String regist(@ModelAttribute UriageForm uriageForm) {
+		Insert insert = new Insert();
+		BeanUtils.copyProperties(uriageForm, insert);
 		uriageService.create(insert);
 		return "redirect:/";
 	}

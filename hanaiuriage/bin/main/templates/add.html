@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>製造部売上管理システム：案件登録</h1>
-	<form th:action="@{/addCheck}" th:object="${insert}" method="post">
+	<form th:action="@{/addCheck}" th:object="${uriageForm}" method="post">
 		<table class="aaddtable">
 			<!-- 顧客プルダウン -->
 			<tr>
@@ -21,42 +21,41 @@
 						</option>
 				</select></td><td th:if="${errAll}"><div th:if="${errAll[1]}" th:text="${errAll[1]}"></div></td>
 			</tr>
-			<tr><th align="right">受注日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.orderdate}"></td>
+			<tr><th align="right">受注日：</th><td><input placeholder="____/__/__" type="text" th:field="${uriageForm.orderdate}"></td>
 			<td th:if="${errAll}"><div th:if="${errAll[2]}" th:text="${errAll[2]}"></div></td>
 			</tr>
-			<tr><th align="right">S番号：</th><td>S-<input type="text" th:field="${insert.snumber}"></td>
+			<tr><th align="right">S番号：</th><td>S-<input type="text" th:field="${uriageForm.snumber}"></td>
 			<td th:if="${errAll}"><div th:if="${errAll[3]}" th:text="${errAll[3]}"></div></td>
 			</tr>
-            <tr><th align="right">件名＊：</th><td><input type="text" th:field="${insert.subject}"></td>
+            <tr><th align="right">件名＊：</th><td><input type="text" th:field="${uriageForm.subject}"></td>
             <td th:if="${errAll}"><div th:if="${errAll[4]}" th:text="${errAll[4]}"></div></td>
             </tr>
-            <tr><th align="right">数量：</th><td><input type="text" th:field="${insert.quantity}"></td>
+            <tr><th align="right">数量：</th><td><input type="text" th:field="${uriageForm.quantity}"></td>
             <td th:if="${errAll}"><div th:if="${errAll[5]}" th:text="${errAll[5]}"></div></td>
             </tr>
-            <tr><th align="right">納入指定日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.deadline}"></td>
+            <tr><th align="right">納入指定日：</th><td><input placeholder="____/__/__" type="text" th:field="${uriageForm.deadline}"></td>
             <td th:if="${errAll}"><div th:if="${errAll[6]}" th:text="${errAll[6]}"></div></td>
             </tr>
-            <tr><th align="right">納入日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.duedate}"></td>
+            <tr><th align="right">納入日：</th><td><input placeholder="____/__/__" type="text" th:field="${uriageForm.duedate}"></td>
             <td th:if="${errAll}"><div th:if="${errAll[7]}" th:text="${errAll[7]}"></div></td>
             </tr>
-            <tr><th align="right">請求日：</th><td><input placeholder="____/__/__" type="text" th:field="${insert.billingdate}"></td>
+            <tr><th align="right">請求日：</th><td><input placeholder="____/__/__" type="text" th:field="${uriageForm.billingdate}"></td>
             <td th:if="${errAll}"><div th:if="${errAll[8]}" th:text="${errAll[8]}"></div></td>
             </tr>
-            <tr><th align="right">見積金額：</th><td>\<input type="text" th:field="${insert.estimate}"></td>
+            <tr><th align="right">見積金額：</th><td>\<input type="text" th:field="${uriageForm.estimate}"></td>
             <td th:if="${errAll}"><div th:if="${errAll[9]}" th:text="${errAll[9]}"></div></td>
             </tr>
-            <tr><th align="right">受注金額：</th><td>\<input type="text" th:field="${insert.decision}"></td>
+            <tr><th align="right">受注金額：</th><td>\<input type="text" th:field="${uriageForm.decision}"></td>
             <td th:if="${errAll}"><div th:if="${errAll[10]}" th:text="${errAll[10]}"></div></td>
             </tr>
             <tr><th align="right">ステータス：</th>
             <!-- ステータスプルダウン -->
             <td><select class="status" name="status" id="2" th:field="*{statusid}">
-						<option class="msg" value="">---</option>
 						<option th:each="statusA : ${addStatusA}"
 							th:value="${statusA.statusid}" th:attr="class=${statusA.clientid}" th:text="${statusA.statusname}">
 						</option>
 				</select></td></tr>
-            <tr><th align="right" valign="top">備考：</th><td><textarea rows="5" cols="50" wrap="hard" th:field="${insert.note}"></textarea></td></tr>
+            <tr><th align="right" valign="top">備考：</th><td><textarea rows="5" cols="50" wrap="hard" th:field="${uriageForm.note}"></textarea></td></tr>
 		</table>
 		<!-- delete_flgはaddCheckからhiddenで送る -->
 		<div class="btn2">
