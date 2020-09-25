@@ -41,9 +41,6 @@ public class UriageService {
 	public List<Uriage> getList() {
         return uriageRepository.findAllOrderById();
     }
-//	    public List<Uriage> getList(Pageable pageable) {
-//	        return uriageRepository.findAllOrderById(pageable);
-//	    }
 
 	//顧客ID,Name取得
 	public List<Client> getClient() {

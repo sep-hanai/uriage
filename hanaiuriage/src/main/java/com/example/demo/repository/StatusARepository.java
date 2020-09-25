@@ -11,7 +11,6 @@ import com.example.demo.entity.StatusA;
 
 /**
  * ステータスArepository
- *
  */
 @Repository
 public interface StatusARepository extends JpaRepository <StatusA, Long>{

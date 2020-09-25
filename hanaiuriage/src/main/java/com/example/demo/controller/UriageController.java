@@ -38,12 +38,7 @@ public class UriageController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(@PageableDefault(page = 0, size = 10) Pageable pageable, Model model) {
-		//		 List<Uriage> uriagePage = uriageService.getList(pageable);
 		List<Uriage> uriagePage = uriageService.getList();
-		//		 PageWrapper<Uriage> page = new PageWrapper<Uriage>(playerPage, "/index");
-		//		 model.addAttribute("page", page);
-		//		 model.addAttribute("jyusyolist", playerPage.getContent());
-		//       model.addAttribute("uriageForm", new UriageForm());
 		model.addAttribute("uriagePage", uriagePage);
 		return "top";
 	}
@@ -107,15 +102,10 @@ public class UriageController {
 		} else {
 			//エラー無し
 			//顧客・ステータスのIDをパラメータにNameを呼び出す
-			//ステータス有り、顧客・ステータスName取得
 			String statusid1 = request.getParameter("statusid");
 			if (statusid1 != "") {
 				List<StatusA> nameAll = uriageService.getSelectName(clientid, statusid);
 				model.addAttribute("nameAll", nameAll);
-			} else {
-				//ステータス無し、顧客Nameのみ取得
-				List<Client> clientAll = uriageService.getSelectClient(clientid);
-				model.addAttribute("clientAll", clientAll);
 			}
 			return "addCheck";
 		}
